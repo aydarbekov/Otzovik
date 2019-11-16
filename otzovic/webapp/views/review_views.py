@@ -29,3 +29,11 @@ class ReviewUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('webapp:product_view', kwargs={'pk': self.object.product.pk})
+
+class ReviewDeleteView(DeleteView):
+    template_name = 'review/delete.html'
+    model = Review
+    context_object_name = 'obj'
+
+    def get_success_url(self):
+        return reverse('webapp:product_view', kwargs={'pk': self.object.product.pk})

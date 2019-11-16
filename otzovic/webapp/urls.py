@@ -1,7 +1,7 @@
 from django.urls import path
 
 from webapp.views.product_views import IndexView, ProductView, ProductCreateView, ProductUpdateView, ProductDeleteView
-from webapp.views.review_views import ReviewForProductCreateView, ReviewUpdateView
+from webapp.views.review_views import ReviewForProductCreateView, ReviewUpdateView, ReviewDeleteView
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
@@ -11,11 +11,11 @@ urlpatterns = [
     path('product/<int:pk>/delete/', ProductDeleteView.as_view(), name='product_delete'),
     path('product/<int:pk>/add-review/', ReviewForProductCreateView.as_view(), name='product_review_create'),
     path('review/<int:pk>/edit/', ReviewUpdateView.as_view(), name='review_update'),
+    path('review/<int:pk>/delete/', ReviewDeleteView.as_view(), name='review_delete'),
 
     # path('massdelete/', TasksDelete.as_view(), name='mass_delete'),
     # path('types/', TypeView.as_view(), name='types_view'),
     # path('types/add/', TypeCreateView.as_view(), name='type_create'),
-    # path('types/<int:pk>/delete/', TypeDeleteView.as_view(), name='type_delete'),
     # path('massdeletetypes/', TypeDelete.as_view(), name='mass_delete_types'),
     # path('statuses/', StatusView.as_view(), name='status_view'),
     # path('status/add/', StatusCreateView.as_view(), name='status_create'),
