@@ -1,16 +1,12 @@
 {% extends 'base.html' %}
 
 {% block menu %}
-    <li><a href="{% url 'webapp:product_create' %}">Add Product</a></li>
-{#    <li><a href="{% url 'webapp:types_view' %}">Types</a></li>#}
-{#    <li><a href="{% url 'webapp:status_view' %}">Statuses</a></li>#}
-{#    <li><a href="{% url 'webapp:projects_view' %}">Projects</a></li>#}
-{#    <li><a href="{% url 'accounts:profiles_list' %}">Users</a></li>#}
-
+    {% if perms.webapp.add_product %}
+        <li><a href="{% url 'webapp:product_create' %}">Add Product</a></li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-{#    {% include 'partial/simple_search.html' %}#}
     <h1>Products:</h1>
     <hr/>
 {#    {% if is_paginated %}#}
@@ -23,10 +19,12 @@
             <h2>{{ product.name }}</h2>
             <div>Категория: {{ product.category }}</div>
             <a href="{% url 'webapp:product_view' product.pk %}">More...</a>
-{#            {% if request.user.is_authenticated %}#}
+            {% if perms.webapp.change_product %}
                 <a href="{% url 'webapp:product_update' product.pk %}">Edit</a>
+            {% endif %}
+            {% if perms.webapp.delete_product %}
                 <a href="{% url 'webapp:product_delete' product.pk %}">Delete</a>
-{#            {% endif %}#}
+            {% endif %}
             <hr/>
         {% endfor %}
 

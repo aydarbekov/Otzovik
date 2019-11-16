@@ -30,31 +30,13 @@
   }
 },
 {
-  "model": "auth.user",
-  "pk": 1,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$0OAJPXphTnEs$ij3Fw9AzwwjrjX1LCSYif+5KbBGSH9Dj93Pacz+B9nw=",
-    "last_login": "2019-11-16T06:01:13.483Z",
-    "is_superuser": true,
-    "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2019-11-16T05:59:42.850Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
   "model": "webapp.review",
   "pk": 1,
   "fields": {
     "user": 1,
     "product": 1,
-    "review": "\u041a\u0440\u0443\u0442\u043e\u0439 \u0442\u043e\u0432\u0430\u0440",
-    "point": 3.0
+    "review": "\u041a\u0440\u0443\u0442\u043e\u0439 \u0442\u043e\u0432\u043022221",
+    "point": 3
   }
 },
 {
@@ -74,7 +56,47 @@
     "user": 1,
     "product": 3,
     "review": "\u041e\u0442\u043b\u0438\u0447\u043d\u044b\u0439 \u0442\u043e\u0432\u0430\u0440",
-    "point": 5.0
+    "point": 5
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "product": 1,
+    "review": "2",
+    "point": 2
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 8,
+  "fields": {
+    "user": 1,
+    "product": 1,
+    "review": "111",
+    "point": 1
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 9,
+  "fields": {
+    "user": 1,
+    "product": 1,
+    "review": "3",
+    "point": 5
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 10,
+  "fields": {
+    "user": 5,
+    "product": 1,
+    "review": "22",
+    "point": 4
   }
 }
 ]

@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Product_view{% endblock %}
 {% block menu %}
-{#    {% if request.user.is_authenticated %}#}
+    {% if perms.webapp.change_product %}
         <li><a href="{% url 'webapp:product_update' product.pk %}">Edit</a></li>
+    {% endif %}
+    {% if perms.webapp.delete_product %}
         <li><a href="{% url 'webapp:product_delete' product.pk %}">Delete</a></li>
+    {% endif %}
 {#    {% endif %}#}
 {#    {% if request.user.is_authenticated and request.user.team_user.project == task.project.pk%}#}
 {#        <li><a href="{% url 'webapp:task_update' task.pk %}">Edit</a></li>#}
@@ -61,9 +64,13 @@
             {% endif %}
 
             <p class="projects-links">
-{#                <a href="{% url 'webapp:task_view' task.pk %}">More</a>#}
-                <a href="{% url 'webapp:review_update' review.pk %}">Edit</a>
-                <a href="{% url 'webapp:review_delete' review.pk %}">Delete</a>
+                {% if perms.webapp.change_product %}
+                    <a href="{% url 'webapp:review_update' review.pk %}">Edit</a>
+                {% endif %}
+                {% if perms.webapp.delete_product %}
+                    <a href="{% url 'webapp:review_delete' review.pk %}">Delete</a>
+                {% endif %}
+            <br>
             </p>
         </div>
     {% empty %}

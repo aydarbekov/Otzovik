@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -24,27 +24,33 @@ class ProductView(DetailView):
     model = Product
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'product/create.html'
     model = Product
     form_class = ProductForm
+    permission_required = 'webapp.add_product'
+    permission_denied_message = "Доступ запрещён"
 
     def get_success_url(self):
         return reverse('webapp:product_view', kwargs={'pk': self.object.pk})
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     model = Product
     template_name = 'product/update.html'
     form_class = ProductForm
     context_object_name = 'obj'
+    permission_required = 'webapp.change_product'
+    permission_denied_message = "Доступ запрещён"
 
     def get_success_url(self):
         return reverse('webapp:product_view', kwargs={'pk': self.object.pk})
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'product/delete.html'
     model = Product
     context_object_name = 'obj'
     success_url = reverse_lazy('webapp:index')
+    permission_required = 'webapp.delete_product'
+    permission_denied_message = "Доступ запрещён"
