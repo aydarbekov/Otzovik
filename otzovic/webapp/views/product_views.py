@@ -1,9 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+from django.urls import reverse, reverse_lazy
 
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
-
+from webapp.forms import ProductForm
 from webapp.models import Product
 
 
@@ -20,3 +22,12 @@ class ProductView(DetailView):
     template_name = 'product/product.html'
     pk_url_kwarg = 'pk'
     model = Product
+
+
+class ProductCreateView(CreateView):
+    template_name = 'product/create.html'
+    model = Product
+    form_class = ProductForm
+
+    def get_success_url(self):
+        return reverse('webapp:product_view', kwargs={'pk': self.object.pk})
