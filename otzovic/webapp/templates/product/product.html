@@ -32,18 +32,18 @@
             <p><b>{{ review.user }}</b></p>
             <p>Отзыв: {{ review.review }}</p>
             <p>Оценка: {{ review.point }}</p>
-{#            <p class="projects-links">#}
+            <p class="projects-links">
 {#                <a href="{% url 'webapp:task_view' task.pk %}">More</a>#}
-{#                <a href="{% url 'webapp:comment_update' comment.pk %}">Edit</a>#}
+                <a href="{% url 'webapp:review_update' review.pk %}">Edit</a>
 {#                <a href="{% url 'webapp:comment_delete' comment.pk %}">Delete</a>#}
-{#            </p>#}
+            </p>
         </div>
     {% empty %}
         <p>Нет отзывов.</p>
     {% endfor %}
 {#    {% if request.user.is_authenticated %}#}
-{#        <form action="{% url 'webapp:project_task_create' project.pk %}" method="POST" id="add_task">#}
-{#            {% include 'partial/task_form.html' with button_text='Add task' %}#}
-{#        </form>#}
+        <form action="{% url 'webapp:product_review_create' product.pk %}" method="POST" id="add_review">
+            {% include 'partial/form.html' with button_text='Add review' %}
+        </form>
 {#    {% endif %}#}
 {% endblock %}
