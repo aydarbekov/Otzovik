@@ -11,7 +11,7 @@
 {#    {% endif %}#}
 {% endblock %}
 {% block content %}
-   <div class="container">
+    <div class="container">
         {% if not product.picture or product.picture == 'False' %}
             {% load static %}
             <img class="avatar" src="{% static 'img/nofoto.png' %}" width="250" height="250" alt="no picture">
@@ -21,6 +21,29 @@
         <h1>{{ product.name }}</h1>
         <p>Категория: {{ product.category }}</p>
         <p>Описание: {{ product.description }}</p>
-
-   </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h3>Отзывы:</h3>
+    {% for review in product.reviews.all %}
+        <div class="task">
+            <p><b>{{ review.user }}</b></p>
+            <p>Отзыв: {{ review.review }}</p>
+            <p>Оценка: {{ review.point }}</p>
+{#            <p class="projects-links">#}
+{#                <a href="{% url 'webapp:task_view' task.pk %}">More</a>#}
+{#                <a href="{% url 'webapp:comment_update' comment.pk %}">Edit</a>#}
+{#                <a href="{% url 'webapp:comment_delete' comment.pk %}">Delete</a>#}
+{#            </p>#}
+        </div>
+    {% empty %}
+        <p>Нет отзывов.</p>
+    {% endfor %}
+{#    {% if request.user.is_authenticated %}#}
+{#        <form action="{% url 'webapp:project_task_create' project.pk %}" method="POST" id="add_task">#}
+{#            {% include 'partial/task_form.html' with button_text='Add task' %}#}
+{#        </form>#}
+{#    {% endif %}#}
 {% endblock %}
