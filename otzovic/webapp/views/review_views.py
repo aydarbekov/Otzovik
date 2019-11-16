@@ -30,7 +30,9 @@ class ReviewUpdateView(PermissionRequiredMixin, UpdateView):
     permission_denied_message = "Доступ запрещён"
 
     def has_permission(self):
-
+        object = self.get_object()
+        if super().has_permission() == True or self.request.user == object.user:
+            return True
 
     def get_success_url(self):
         return reverse('webapp:product_view', kwargs={'pk': self.object.product.pk})
@@ -41,6 +43,11 @@ class ReviewDeleteView(PermissionRequiredMixin, DeleteView):
     context_object_name = 'obj'
     permission_required = 'webapp.delete_product'
     permission_denied_message = "Доступ запрещён"
+
+    def has_permission(self):
+        object = self.get_object()
+        if super().has_permission() == True or self.request.user == object.user:
+            return True
 
     def get_success_url(self):
         return reverse('webapp:product_view', kwargs={'pk': self.object.product.pk})
