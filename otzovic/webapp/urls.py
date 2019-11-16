@@ -1,13 +1,13 @@
 from django.urls import path
 
-from webapp.views.product_views import IndexView, ProductView, ProductCreateView, ProductUpdateView
+from webapp.views.product_views import IndexView, ProductView, ProductCreateView, ProductUpdateView, ProductDeleteView
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('product/<int:pk>/', ProductView.as_view(), name='product_view'),
     path('product/add/', ProductCreateView.as_view(), name='product_create'),
     path('product/<int:pk>/edit/', ProductUpdateView.as_view(), name='product_update'),
-    # path('task/<int:pk>/delete/', TaskDeleteView.as_view(), name='task_delete'),
+    path('product/<int:pk>/delete/', ProductDeleteView.as_view(), name='product_delete'),
     # path('massdelete/', TasksDelete.as_view(), name='mass_delete'),
     # path('types/', TypeView.as_view(), name='types_view'),
     # path('types/add/', TypeCreateView.as_view(), name='type_create'),
