@@ -31,3 +31,13 @@ class ProductCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('webapp:product_view', kwargs={'pk': self.object.pk})
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    template_name = 'product/update.html'
+    form_class = ProductForm
+    context_object_name = 'obj'
+
+    def get_success_url(self):
+        return reverse('webapp:product_view', kwargs={'pk': self.object.pk})
