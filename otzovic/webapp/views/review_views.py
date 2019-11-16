@@ -9,7 +9,7 @@ from webapp.forms import ProductForm, ProductReviewForm
 from webapp.models import Product, Review
 
 
-class ReviewForProductCreateView(CreateView):
+class ReviewForProductCreateView(LoginRequiredMixin, CreateView):
     template_name = 'review/create.html'
     form_class = ProductReviewForm
 
@@ -28,6 +28,9 @@ class ReviewUpdateView(PermissionRequiredMixin, UpdateView):
     context_object_name = 'obj'
     permission_required = 'webapp.change_product'
     permission_denied_message = "Доступ запрещён"
+
+    def has_permission(self):
+
 
     def get_success_url(self):
         return reverse('webapp:product_view', kwargs={'pk': self.object.product.pk})

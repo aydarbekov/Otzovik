@@ -19,4 +19,52 @@
     <p>О себе: {{ user_obj.profile.about }}</p>
     <p>Почта: {{ user_obj.email }}</p>
     <p>GitHub: <a href="{{ user_obj.profile.github_profile }}">{{ user_obj.profile.github_profile }}</a></p>
+
+    <h3>Отзывы:</h3>
+    {% for review in user_obj.reviews.all %}
+        <div class="task">
+            <p><b><a href="{% url 'accounts:user_detail' review.user_id %}">{{ review.user }}</a></b></p>
+            <p>Email: {{ review.user.email }}</p>
+            <p>Отзыв: {{ review.review }}</p>
+            <p>Оценка: </p>
+            {% if review.point == 1 %}
+                {% load static %}
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+            {% elif review.point == 2 %}
+                {% load static %}
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+            {% elif review.point == 3 %}
+                {% load static %}
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+            {% elif review.point == 4 %}
+                {% load static %}
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+            {% elif review.point == 5 %}
+                {% load static %}
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+            {% endif %}
+
+            <p class="projects-links">
+                {% if perms.webapp.change_product or request.user == review.user %}
+                    <a href="{% url 'webapp:review_update' review.pk %}">Edit</a>
+                {% endif %}
+                {% if perms.webapp.delete_product or request.user == review.user %}
+                    <a href="{% url 'webapp:review_delete' review.pk %}">Delete</a>
+                {% endif %}
+            <br>
+            </p>
+        </div>
+    {% empty %}
+        <p>Нет отзывов.</p>
+    {% endfor %}
 {% endblock %}
