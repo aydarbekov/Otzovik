@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
@@ -31,8 +32,8 @@ class Review(models.Model):
     product = models.ForeignKey('Product', null=True, blank=True, related_name='reviews', on_delete=models.CASCADE,
                                 verbose_name='Товар')
     review = models.CharField(max_length=300, verbose_name='Отзыв')
-    point = models.FloatField(verbose_name='Оценка')
-
+    point = models.IntegerField(verbose_name='Оценка', validators=[MinValueValidator(1),
+                                       MaxValueValidator(5)])
 
     def __str__(self):
         return "{} / {} - {}".format(self.product, self.user, self.point)

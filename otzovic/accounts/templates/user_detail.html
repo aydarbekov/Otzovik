@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ user_obj.username }}{% endblock %}
+{% block menu %}
+    {% if user_obj == request.user %}
+        <li><a href="{% url 'accounts:user_update' user_obj.pk %}">Edit profile</a></li>
+        <li><a href="{% url 'accounts:user_change_password' user_obj.pk %}">Change password</a></li>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <h1>Профиль: {{ user_obj.username }}</h1>
+    {% if not user_obj.profile.avatar or user_obj.profile.avatar == 'False' %}
+        {% load static %}
+        <img class="avatar" src="{% static 'img/nofoto.png' %}" width="250" height="250" alt="no picture">
+    {% else %}
+        <img class="avatar" src="{{ user_obj.profile.avatar.url }}" width="250" height="250" alt="user picture">
+    {% endif %}
+    <p>Имя: <b>{{ user_obj.first_name }}</b></p>
+    <p>Фамилия: {{ user_obj.last_name }}</p>
+    <p>О себе: {{ user_obj.profile.about }}</p>
+    <p>Почта: {{ user_obj.email }}</p>
+    <p>GitHub: <a href="{{ user_obj.profile.github_profile }}">{{ user_obj.profile.github_profile }}</a></p>
+{% endblock %}

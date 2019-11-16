@@ -29,9 +29,37 @@
     <h3>Отзывы:</h3>
     {% for review in product.reviews.all %}
         <div class="task">
-            <p><b>{{ review.user }}</b></p>
+            <p><b><a href="{% url 'accounts:user_detail' review.user_id %}">{{ review.user }}</a></b></p>
+            <p>Email: {{ review.user.email }}</p>
             <p>Отзыв: {{ review.review }}</p>
-            <p>Оценка: {{ review.point }}</p>
+            <p>Оценка: </p>
+            {% if review.point == 1 %}
+                {% load static %}
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+            {% elif review.point == 2 %}
+                {% load static %}
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+            {% elif review.point == 3 %}
+                {% load static %}
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+            {% elif review.point == 4 %}
+                {% load static %}
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+            {% elif review.point == 5 %}
+                {% load static %}
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+                <img class="star" src="{% static 'img/star.jpg' %}" width="30" height="30" alt="star">
+            {% endif %}
+
             <p class="projects-links">
 {#                <a href="{% url 'webapp:task_view' task.pk %}">More</a>#}
                 <a href="{% url 'webapp:review_update' review.pk %}">Edit</a>
